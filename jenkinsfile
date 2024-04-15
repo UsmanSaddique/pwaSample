@@ -12,7 +12,7 @@ pipeline {
                 echo 'Checking out source code...'
                 // Checkout your Angular app source code from version control
                 // For example, if you're using Git:
-                git 'your_git_repository_url'
+                git 'https://github.com/UsmanSaddique/pwaSample'
             }
         }
         
