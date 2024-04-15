@@ -7,12 +7,7 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                echo 'Checking out source code...'
-                git 'https://github.com/UsmanSaddique/pwaSample'
-            }
-        }
+         
         
         stage('Build') {
             steps {
