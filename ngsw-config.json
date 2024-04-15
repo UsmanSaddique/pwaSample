@@ -19,11 +19,25 @@
       "name": "assets",
       "installMode": "lazy",
       "updateMode": "prefetch",
+      
       "resources": {
         "files": [
           "/assets/**",
           "/*.(svg|cur|jpg|jpeg|png|apng|webp|avif|gif|otf|ttf|woff|woff2)"
         ]
+      }
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "weatherapi",
+      "urls": ["https://api.open-meteo.com/v1/forecast","https://localhost:7059/items"],
+      "version": 1,
+      "cacheConfig": {
+        "maxSize": 5,
+        "maxAge": "10m",
+        "timeout": "10s",
+        "strategy":"performance"
       }
     }
   ]
