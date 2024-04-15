@@ -1,21 +1,40 @@
 pipeline {
     agent any
     
+    environment {
+        ANGULAR_CLI_VERSION = 'latest' // Change this to your desired Angular CLI version
+        ANGULAR_APP_DIRECTORY = 'your_angular_app_directory' // Change this to your Angular app directory
+    }
+
     stages {
-        stage('Build Docker Image') {
+        stage('Checkout') {
             steps {
-                script {
-                    // Build Docker image
-                    sh 'docker build -t angular-pwa .'
-                }
+                echo 'Checking out source code...'
+                // Checkout your Angular app source code from version control
+                // For example, if you're using Git:
+                git 'your_git_repository_url'
             }
         }
-        stage('Run Docker Container') {
+        
+        stage('Build') {
             steps {
-                script {
-                    // Run Docker container
-                    sh 'docker run -d -p 8081:80 angular-pwa'
-                }
+                echo 'Building Angular app...'
+                // Install Angular CLI
+                sh "npm install -g @angular/cli@${ANGULAR_CLI_VERSION}"
+                
+                // Install project dependencies
+                sh "cd ${ANGULAR_APP_DIRECTORY} && npm install"
+                
+                // Build Angular app
+                sh "cd ${ANGULAR_APP_DIRECTORY} && ng build --prod"
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                echo 'Deploying Angular app...'
+                // Deploy Angular app to local server
+                sh "cd ${ANGULAR_APP_DIRECTORY}/dist && python -m http.server 8081"
             }
         }
     }
