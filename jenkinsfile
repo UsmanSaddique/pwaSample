@@ -34,7 +34,7 @@ pipeline {
             steps {
                 echo 'Deploying Angular app...'
                 // Deploy Angular app to local server
-                sh "cd ${ANGULAR_APP_DIRECTORY}/dist && python -m http.server 8081"
+                sh "cd ${ANGULAR_APP_DIRECTORY}/dist && http-server -p 8081 -c-1 angular-pwa"
             }
         }
     }
