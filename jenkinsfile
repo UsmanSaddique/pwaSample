@@ -16,18 +16,24 @@ pipeline {
         
         stage('Build') {
             steps {
-                echo 'Building Angular app...'
-                // Install Angular CLI
-                sh "npm install -g @angular/cli@${ANGULAR_CLI_VERSION}"
-                echo 'Angular CLI installed...'
-                
-                // Install project dependencies
-                sh "cd ${ANGULAR_APP_DIRECTORY} && npm install"
-                echo 'Project dependencies installed...'
-                
-                // Build Angular app
-                sh "cd ${ANGULAR_APP_DIRECTORY} && ng build --prod"
-                echo 'Angular app built...'
+                script {
+                    echo 'Building Angular app...'
+                    // Install Angular CLI
+                    def angularCLIInstalled = sh(returnStdout: true, script: "npm install -g @angular/cli@${ANGULAR_CLI_VERSION}").trim()
+                    echo "Angular CLI installation result: ${angularCLIInstalled}"
+                    
+                    // Install project dependencies
+                    def dependenciesInstalled = sh(returnStdout: true, script: "cd ${ANGULAR_APP_DIRECTORY} && npm install").trim()
+                    echo "Project dependencies installation result: ${dependenciesInstalled}"
+                    
+                    // Build Angular app
+                    def buildResult = sh(returnStatus: true, script: "cd ${ANGULAR_APP_DIRECTORY} && ng build --prod")
+                    if (buildResult != 0) {
+                        error "Failed to build Angular app"
+                    } else {
+                        echo 'Angular app built successfully'
+                    }
+                }
             }
         }
         
