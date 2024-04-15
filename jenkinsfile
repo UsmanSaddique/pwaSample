@@ -21,6 +21,7 @@ pipeline {
                 echo 'Building Angular app...'
                 // Install Angular CLI
                 sh "npm install "
+                echo 'install is working...'
                 
                 // Install project dependencies
                 sh "cd ${ANGULAR_APP_DIRECTORY} && npm install"
