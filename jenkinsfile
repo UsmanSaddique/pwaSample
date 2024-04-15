@@ -3,7 +3,7 @@ pipeline {
     
     environment {
         ANGULAR_CLI_VERSION = 'latest' // Change this to your desired Angular CLI version
-        ANGULAR_APP_DIRECTORY = 'your_angular_app_directory' // Change this to your Angular app directory
+        ANGULAR_APP_DIRECTORY = 'D:\\PWA\\angular-pwa' // Change this to your Angular app directory
     }
 
     stages {
@@ -20,7 +20,7 @@ pipeline {
             steps {
                 echo 'Building Angular app...'
                 // Install Angular CLI
-                sh "npm install -g @angular/cli@${ANGULAR_CLI_VERSION}"
+                sh "npm install "
                 
                 // Install project dependencies
                 sh "cd ${ANGULAR_APP_DIRECTORY} && npm install"
