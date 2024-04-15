@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker image
-                    sh 'docker build -t angular-app .'
+                    sh 'docker build -t angular-pwa .'
                 }
             }
         }
@@ -14,7 +14,7 @@ pipeline {
             steps {
                 script {
                     // Run Docker container
-                    sh 'docker run -d -p 8081:80 angular-app'
+                    sh 'docker run -d -p 8081:80 angular-pwa'
                 }
             }
         }
