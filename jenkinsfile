@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        ANGULAR_CLI_VERSION = '14.1.0' // Change this to your desired Angular CLI version
+        ANGULAR_CLI_VERSION = '14.1.0' // Updated Angular CLI version
         ANGULAR_APP_DIRECTORY = 'D:\\PWA\\angular-pwa' // Change this to your Angular app directory
     }
 
@@ -41,7 +41,7 @@ pipeline {
             steps {
                 echo 'Deploying Angular app...'
                 // Deploy Angular app to local server
-                sh "cd ${ANGULAR_APP_DIRECTORY}/dist && http-server -p 8081"
+                bat "start http-server -p 8081 ${ANGULAR_APP_DIRECTORY}/dist"
             }
         }
     }
